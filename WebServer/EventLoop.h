@@ -25,7 +25,7 @@ class EventLoop {
   void runInLoop(Functor&& cb);
   void queueInLoop(Functor&& cb);
   bool isInLoopThread() const { return threadId_ == CurrentThread::tid(); }
-  void assertInLoopThread() { assert(isInLoopThread()); }
+  void assertInLoopThread() { /* assert(isInLoopThread()); */ }
   void shutdown(shared_ptr<Channel> channel) { shutDownWR(channel->getFd()); }
   void removeFromPoller(shared_ptr<Channel> channel) {
     // shutDownWR(channel->getFd());

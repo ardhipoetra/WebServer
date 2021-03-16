@@ -91,7 +91,7 @@ void EventLoop::queueInLoop(Functor&& cb) {
 
 void EventLoop::loop() {
   assert(!looping_);
-  assert(isInLoopThread());
+  // assert(isInLoopThread());
   looping_ = true;
   quit_ = false;
   // LOG_TRACE << "EventLoop " << this << " start looping";
