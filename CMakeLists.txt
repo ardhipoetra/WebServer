@@ -7,7 +7,6 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 set(CXX_FLAGS
-    -g
     -Wall
     -std=c++11
     -D_PTHREADS
