@@ -11,12 +11,8 @@ set(CXX_FLAGS
     -std=c++11
     -D_PTHREADS
     -Wno-unused-parameter
+    -O3
 )
-
-
-set(CMAKE_CXX_COMPILER "g++")
-set(CMAKE_CXX_FLAGS_DEBUG "-O0")
-set(CMAKE_CXX_FLAGS_RELEASE "-O0")
 
 string(REPLACE ";" " " CMAKE_CXX_FLAGS "${CXX_FLAGS}")
 
