@@ -17,9 +17,9 @@ class Channel {
   typedef std::function<void()> CallBack;
   EventLoop *loop_;
   int fd_;
-  __uint32_t events_;
-  __uint32_t revents_;
-  __uint32_t lastEvents_;
+  u_int32_t events_;
+  u_int32_t revents_;
+  u_int32_t lastEvents_;
 
   // 方便找到上层持有该Channel的对象
   std::weak_ptr<HttpData> holder_;
@@ -80,10 +80,10 @@ class Channel {
   void handleError(int fd, int err_num, std::string short_msg);
   void handleConn();
 
-  void setRevents(__uint32_t ev) { revents_ = ev; }
+  void setRevents(u_int32_t ev) { revents_ = ev; }
 
-  void setEvents(__uint32_t ev) { events_ = ev; }
-  __uint32_t &getEvents() { return events_; }
+  void setEvents(u_int32_t ev) { events_ = ev; }
+  u_int32_t &getEvents() { return events_; }
 
   bool EqualAndUpdateLastEvents() {
     bool ret = (lastEvents_ == events_);
@@ -91,7 +91,7 @@ class Channel {
     return ret;
   }
 
-  __uint32_t getLastEvents() { return lastEvents_; }
+  u_int32_t getLastEvents() { return lastEvents_; }
 };
 
 typedef std::shared_ptr<Channel> SP_Channel;

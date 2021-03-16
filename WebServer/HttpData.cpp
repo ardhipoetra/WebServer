@@ -15,7 +15,7 @@ using namespace std;
 pthread_once_t MimeType::once_control = PTHREAD_ONCE_INIT;
 std::unordered_map<std::string, std::string> MimeType::mime;
 
-const __uint32_t DEFAULT_EVENT = EPOLLIN | EPOLLET | EPOLLONESHOT;
+const u_int32_t DEFAULT_EVENT = EPOLLIN | EPOLLET | EPOLLONESHOT;
 const int DEFAULT_EXPIRED_TIME = 2000;              // ms
 const int DEFAULT_KEEP_ALIVE_TIME = 5 * 60 * 1000;  // ms
 
@@ -153,7 +153,7 @@ void HttpData::seperateTimer() {
 }
 
 void HttpData::handleRead() {
-  __uint32_t &events_ = channel_->getEvents();
+  u_int32_t &events_ = channel_->getEvents();
   do {
     bool zero = false;
     int read_num = readn(fd_, inBuffer_, zero);
@@ -269,7 +269,7 @@ void HttpData::handleRead() {
 
 void HttpData::handleWrite() {
   if (!error_ && connectionState_ != H_DISCONNECTED) {
-    __uint32_t &events_ = channel_->getEvents();
+    u_int32_t &events_ = channel_->getEvents();
     if (writen(fd_, outBuffer_) < 0) {
       perror("writen");
       events_ = 0;
@@ -281,13 +281,13 @@ void HttpData::handleWrite() {
 
 void HttpData::handleConn() {
   seperateTimer();
-  __uint32_t &events_ = channel_->getEvents();
+  u_int32_t &events_ = channel_->getEvents();
   if (!error_ && connectionState_ == H_CONNECTED) {
     if (events_ != 0) {
       int timeout = DEFAULT_EXPIRED_TIME;
       if (keepAlive_) timeout = DEFAULT_KEEP_ALIVE_TIME;
       if ((events_ & EPOLLIN) && (events_ & EPOLLOUT)) {
-        events_ = __uint32_t(0);
+        events_ = u_int32_t(0);
         events_ |= EPOLLOUT;
       }
       // events_ |= (EPOLLET | EPOLLONESHOT);
