@@ -33,4 +33,9 @@ class Logger {
   static std::string logFileName_;
 };
 
-#define LOG Logger(__FILE__, __LINE__).stream()
+struct nullstream {};
+template <typename T> nullstream & operator<<(nullstream & s, T const &) {return s;}
+static nullstream logstream;
+
+#define LOG logstream
+// #define LOG Logger(__FILE__, __LINE__).stream()
