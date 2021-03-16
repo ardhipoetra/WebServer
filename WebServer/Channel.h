@@ -21,7 +21,6 @@ class Channel {
   u_int32_t revents_;
   u_int32_t lastEvents_;
 
-  // 方便找到上层持有该Channel的对象
   std::weak_ptr<HttpData> holder_;
 
  private:

@@ -39,7 +39,6 @@ class EventLoop {
   }
 
  private:
-  // 声明顺序 wakeupFd_ > pwakeupChannel_
   bool looping_;
   shared_ptr<Epoll> poller_;
   int wakeupFd_;

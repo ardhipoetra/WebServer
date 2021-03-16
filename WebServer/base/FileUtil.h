@@ -9,7 +9,6 @@ class AppendFile : noncopyable {
  public:
   explicit AppendFile(std::string filename);
   ~AppendFile();
-  // append 会向文件写
   void append(const char *logline, const size_t len);
   void flush();
 

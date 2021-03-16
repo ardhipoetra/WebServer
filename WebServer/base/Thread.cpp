@@ -33,7 +33,6 @@ void CurrentThread::cacheTid() {
   }
 }
 
-// 为了在线程中保留name,tid这些数据
 struct ThreadData {
   typedef Thread::ThreadFunc ThreadFunc;
   ThreadFunc func_;

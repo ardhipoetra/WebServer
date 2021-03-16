@@ -37,7 +37,6 @@ template class FixedBuffer<kLargeBuffer>;
 
 template <typename T>
 void LogStream::formatInteger(T v) {
-  // buffer容不下kMaxNumericSize个字符的话会被直接丢弃
   if (buffer_.avail() >= kMaxNumericSize) {
     size_t len = convert(buffer_.current(), v);
     buffer_.add(len);

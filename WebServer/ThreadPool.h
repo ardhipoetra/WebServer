@@ -43,7 +43,6 @@ private:
     static int thread_count;
     static int queue_size;
     static int head;
-    // tail 指向尾节点的下一节点
     static int tail;
     static int count;
     static int shutdown;

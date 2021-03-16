@@ -48,7 +48,6 @@ int main(int argc, char *argv[]) {
   inet_pton(AF_INET, IPADDRESS, &servaddr.sin_addr);
   char buff[4096];
   buff[0] = '\0';
-  // 发空串
   const char *p = " ";
   if (connect(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr)) == 0) {
     setSocketNonBlocking1(sockfd);
@@ -65,7 +64,6 @@ int main(int argc, char *argv[]) {
   }
   sleep(1);
 
-  // 发"GET  HTTP/1.1"
   p = "GET  HTTP/1.1";
   sockfd = socket(AF_INET, SOCK_STREAM, 0);
   if (connect(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr)) == 0) {
@@ -83,7 +81,6 @@ int main(int argc, char *argv[]) {
   }
   sleep(1);
 
-  // 发
   // GET  HTTP/1.1
   // Host: 192.168.52.135:8888
   // Content-Type: application/x-www-form-urlencoded

@@ -175,9 +175,6 @@ void HttpData::handleRead() {
     //     break;
     // }
     else if (zero) {
-      // 有请求出现但是读不到数据，可能是Request
-      // Aborted，或者来自网络的数据没有达到等原因
-      // 最可能是对端已经关闭了，统一按照对端已经关闭处理
       // error_ = true;
       connectionState_ = H_DISCONNECTING;
       if (read_num == 0) {
@@ -212,7 +209,6 @@ void HttpData::handleRead() {
         break;
       }
       if (method_ == METHOD_POST) {
-        // POST方法准备
         state_ = STATE_RECV_BODY;
       } else {
         state_ = STATE_ANALYSIS;
@@ -320,12 +316,10 @@ void HttpData::handleConn() {
 URIState HttpData::parseURI() {
   string &str = inBuffer_;
   string cop = str;
-  // 读到完整的请求行再开始解析请求
   size_t pos = str.find('\r', nowReadPos_);
   if (pos < 0) {
     return PARSE_URI_AGAIN;
   }
-  // 去掉请求行所占的空间，节省空间
   string request_line = str.substr(0, pos);
   if (str.size() > pos + 1)
     str = str.substr(pos + 1);
@@ -374,7 +368,6 @@ URIState HttpData::parseURI() {
     pos = _pos;
   }
   // cout << "fileName_: " << fileName_ << endl;
-  // HTTP 版本号
   pos = request_line.find("/", pos);
   if (pos < 0)
     return PARSE_URI_ERROR;
@@ -552,7 +545,6 @@ AnalysisState HttpData::analysisRequest() {
     header += "Content-Type: " + filetype + "\r\n";
     header += "Content-Length: " + to_string(sbuf.st_size) + "\r\n";
     header += "Server: LinYa's Web Server\r\n";
-    // 头部结束
     header += "\r\n";
     outBuffer_ += header;
 
@@ -597,7 +589,6 @@ void HttpData::handleError(int fd, int err_num, string short_msg) {
   header_buff += "Server: LinYa's Web Server\r\n";
   ;
   header_buff += "\r\n";
-  // 错误处理不考虑writen不完的情况
   sprintf(send_buff, "%s", header_buff.c_str());
   writen(fd, send_buff, strlen(send_buff));
   sprintf(send_buff, "%s", body_buff.c_str());

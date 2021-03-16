@@ -11,7 +11,6 @@
 using namespace std;
 
 AppendFile::AppendFile(string filename) : fp_(fopen(filename.c_str(), "ae")) {
-  // 用户提供缓冲区
   setbuffer(fp_, buffer_, sizeof buffer_);
 }
 

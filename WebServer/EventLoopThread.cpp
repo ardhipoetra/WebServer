@@ -23,7 +23,6 @@ EventLoop* EventLoopThread::startLoop() {
   thread_.start();
   {
     MutexLockGuard lock(mutex_);
-    // 一直等到threadFun在Thread里真正跑起来
     while (loop_ == NULL) cond_.wait();
   }
   return loop_;

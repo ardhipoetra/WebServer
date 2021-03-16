@@ -76,7 +76,6 @@ class HttpData : public std::enable_shared_from_this<HttpData> {
   void reset();
   void seperateTimer();
   void linkTimer(std::shared_ptr<TimerNode> mtimer) {
-    // shared_ptr重载了bool, 但weak_ptr没有
     timer_ = mtimer;
   }
   std::shared_ptr<Channel> getChannel() { return channel_; }
